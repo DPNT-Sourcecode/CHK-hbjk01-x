@@ -20,6 +20,3 @@ def test_sum_positive_cases(x, y, expected):
 def test_sum_negative_cases(x, y):
     with raises(Exception):
         sum_solution.compute(x, y)
-
-
-
