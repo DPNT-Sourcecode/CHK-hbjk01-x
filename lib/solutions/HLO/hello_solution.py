@@ -1,5 +1,6 @@
 # noinspection PyUnusedLocal
 # friend_name = unicode string
 def hello(friend_name):
-    return "a message"
+    return "Hello, world!"
+
 
