@@ -159,11 +159,37 @@
     },
     {
         "sku": "S",
-        "price": 30
+        "price": 20,
+        "offers": [
+            {
+                "quantity": 3,
+                "anyOf": [
+                    "S",
+                    "T",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "price": 45
+            }
+        ]
     },
     {
         "sku": "T",
-        "price": 20
+        "price": 20,
+        "offers": [
+            {
+                "quantity": 3,
+                "anyOf": [
+                    "S",
+                    "T",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "price": 45
+            }
+        ]
     },
     {
         "sku": "U",
@@ -200,14 +226,53 @@
     },
     {
         "sku": "X",
-        "price": 90
+        "price": 17,
+        "offers": [
+            {
+                "quantity": 3,
+                "anyOf": [
+                    "S",
+                    "T",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "price": 45
+            }
+        ]
     },
     {
         "sku": "Y",
-        "price": 10
+        "price": 20,
+        "offers": [
+            {
+                "quantity": 3,
+                "anyOf": [
+                    "S",
+                    "T",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "price": 45
+            }
+        ]
     },
     {
         "sku": "Z",
-        "price": 50
+        "price": 21,
+        "offers": [
+            {
+                "quantity": 3,
+                "anyOf": [
+                    "S",
+                    "T",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "price": 45
+            }
+        ]
     }
 ]
