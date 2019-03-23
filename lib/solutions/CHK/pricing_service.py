@@ -20,7 +20,7 @@ class PricingService(object):
                 relevant_offers = [offer for offer in sku_info['offers'] if offer['quantity'] <= quantity]
                 
                 while quantity > 1 and len(relevant_offers) > 0:
-                    sorted_offers = sorted(relevant_offers, lambda key: key['quantity'], reverse=True)
+                    sorted_offers = sorted(relevant_offers, key=lambda key: key['quantity'], reverse=True)
                     offer = sorted_offers[0]
                     quantity -= offer['quantity']
                     total += offer['price']
@@ -29,4 +29,5 @@ class PricingService(object):
             total += sku_info['price'] * quantity
 
         return total
+
 
