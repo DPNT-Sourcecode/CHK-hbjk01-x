@@ -1,6 +1,6 @@
 {
     "python.unitTest.pyTestArgs": [
-        "--rootDir",
+        "--rootdir",
         "lib",
         "test"
     ],
@@ -8,3 +8,4 @@
     "python.unitTest.nosetestsEnabled": false,
     "python.unitTest.pyTestEnabled": true
 }
+
