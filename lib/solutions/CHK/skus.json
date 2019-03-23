@@ -39,10 +39,10 @@
         "offers": [
             {
                 "quantity": 2,
-                "freebies": {
+                "freebies": [{
                     "sku": "B",
                     "quantity": 1
-                }
+                }]
             }
         ]
     }
