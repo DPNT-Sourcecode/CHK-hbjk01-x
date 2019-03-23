@@ -12,7 +12,7 @@ def checkout(skus):
     sku_service = SkuService()
     
     try:
-        sku_service.load_from_json_file('skus.json')
+        sku_service.load_from_json_file('solutions/chk/skus.json')
     except Exception:
         logging.error("Unable to load SKUs", exc_info=True)
         return -1
@@ -28,3 +28,4 @@ def checkout(skus):
 
 if __name__ == "__main__":
     print(checkout('AAB'))
+
