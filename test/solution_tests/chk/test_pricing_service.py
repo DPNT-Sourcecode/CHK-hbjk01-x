@@ -40,7 +40,8 @@ from pytest import mark
     ("STY", 45),
     ("XXX", 45),
     ("ZYX", 45),
-    ("ZY", 41)
+    ("ZY", 41),
+    ("XXXST", 79)
 ])
 def test_get_price(basket_string, expected_output):
     sku_service = SkuService()
@@ -51,5 +52,6 @@ def test_get_price(basket_string, expected_output):
     price = service.get_price(basket_string)
 
     assert price == expected_output
+
 
 
