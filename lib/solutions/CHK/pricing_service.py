@@ -33,16 +33,20 @@ class PricingService(object):
                                 number_discountable = sku_quantities[freebie['sku']] - number_already_used
                                 freebie_sku_info = self.sku_service.get_sku(freebie['sku'])
                                 should_use_freebies = True
+                                total_saving = self._get_offer_value(best_offer, sku_quantities, freebies_used, number_discountable, sku_info['price'])
                                 if 'offers' in freebie_sku_info and len(freebie_sku_info['offers']) > 0:
                                     freebie_best_offer = self._find_best_offer(freebie_sku_info['offers'], sku_quantities, freebies_used, number_discountable, freebie_sku_info['price'])
                                     if freebie_best_offer is not None:
-                                        freebie_saving = self._get_offer_value(best_offer, sku_quantities, freebies_used, number_discountable, sku_info['price'])
+                                        freebie_saving = total_saving
                                         offer_saving = self._get_offer_value(freebie_best_offer, sku_quantities, freebies_used, number_discountable, freebie_sku_info['price'])
                                         if offer_saving > freebie_saving:
                                             should_use_freebies = False
+                                        else:
+                                            # the offer on this freebie isn't as good, so also counteract that in the price
+                                            total_saving -= offer_saving
                                 
                                 if should_use_freebies:
-                                    total -= freebie['quantity'] * freebie_sku_info['price']
+                                    total -= total_saving
                                     freebies_used[freebie['sku']] = number_already_used + freebie['quantity']
                     best_offer = self._find_best_offer(sku_info['offers'], sku_quantities, freebies_used, quantity, sku_info['price'])
                 
