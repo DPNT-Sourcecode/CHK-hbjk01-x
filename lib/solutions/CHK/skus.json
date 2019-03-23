@@ -45,5 +45,18 @@
                 }]
             }
         ]
+    },
+    {
+        "sku": "F",
+        "price": 10,
+        "offers": [
+            {
+                "quantity": 2,
+                "freebies": [{
+                    "sku": "F",
+                    "quantity": 1
+                }]
+            }
+        ]
     }
 ]
