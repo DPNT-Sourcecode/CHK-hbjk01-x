@@ -33,7 +33,7 @@ class PricingService(object):
                                 number_discountable = sku_quantities[freebie['sku']] - number_already_used
                                 freebie_sku_info = self.sku_service.get_sku(freebie['sku'])
                                 if 'offers' in freebie_sku_info and len(freebie_sku_info['offers']) > 0:
-                                    freebie_best_offer = self.find_best_offer(freebie_sku_info['offers'], number_discountable)
+                                    freebie_best_offer = self._find_best_offer(freebie_sku_info['offers'], number_discountable)
                                     if freebie_best_offer is not None:
                                         freebie_saving = freebie['quantity'] * freebie_sku_info['price']
                                         offer_saving = (freebie_sku_info['price'] * freebie['quantity']) - freebie_best_offer['price']
@@ -53,3 +53,4 @@ class PricingService(object):
         relevant_offers = [offer for offer in offers if offer['quantity'] <= current_quantity]
         sorted_offers = sorted(relevant_offers, key=lambda key: key['quantity'], reverse=True)
         return sorted_offers[0] if len(sorted_offers) > 0 else None
+
