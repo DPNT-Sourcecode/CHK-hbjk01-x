@@ -16,12 +16,8 @@ def test_get_price(basket_string, expected_output):
     sku_service = SkuService()
     service = PricingService(sku_service)
 
-    sku_service.load_from_json_file('c:/development/fake/IWOCA/accelerate_runner/lib/solutions/chk/skus.json''')
+    sku_service.load_from_json_file('lib/solutions/chk/skus.json')
     
     price = service.get_price(basket_string)
 
     assert price == expected_output
-
-
-
-
