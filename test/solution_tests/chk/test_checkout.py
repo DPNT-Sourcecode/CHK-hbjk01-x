@@ -1,5 +1,6 @@
 from solutions.CHK.checkout_solution import checkout
 from solutions.CHK.sku_service import SkuService
+from solutions.CHK.pricing_service import PricingService
 from solutions.CHK.validation_service import ValidationService
 from unittest.mock import patch
 from pytest import mark
@@ -21,3 +22,14 @@ def test_checkout_invalid_string_returns_fail(mock_sku_service, mock_validation_
     output = checkout("things")
 
     assert output == -1
+
+@patch('solutions.CHK.pricing_service.PricingService', spec=PricingService)
+@patch('solutions.CHK.validation_service.ValidationService', spec=ValidationService)
+@patch('solutions.CHK.sku_service.SkuService', spec=SkuService)
+def test_checkout_valid_skus_returns_price(mock_sku_service, mock_validation_service, mock_pricing_service):
+    mock_validation_service.validate_basket.return_value = True
+    mock_pricing_service.get_price.return_value = 75
+
+    output = checkout("this")
+
+    assert output == 75
