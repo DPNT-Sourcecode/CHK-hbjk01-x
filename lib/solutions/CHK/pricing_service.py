@@ -14,7 +14,6 @@ class PricingService(object):
             sku_quantities[group_key] = len(list(group))
 
         freebies_used = {}
-        offers_used = {}
         for sku, quantity in sku_quantities.items():
             sku_info = self.sku_service.get_sku(sku)
 
@@ -83,4 +82,5 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
 
