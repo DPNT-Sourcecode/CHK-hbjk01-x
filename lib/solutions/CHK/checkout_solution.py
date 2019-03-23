@@ -1,6 +1,7 @@
 import logging
 
 from sku_service import SkuService
+from validation_service import ValidationService
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -11,7 +12,7 @@ def checkout(skus):
     
     try:
         sku_service.load_from_json_file('skus.json')
-    except Exception as e:
+    except Exception:
         logging.error("Unable to load SKUs", exc_info=True)
         return -1
 

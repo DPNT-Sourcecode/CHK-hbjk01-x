@@ -1,4 +1,4 @@
-from solutions.CHK.basket_service import BasketService
+from solutions.CHK.validation_service import ValidationService
 from pytest import mark
 from unittest.mock import MagicMock
 
@@ -11,7 +11,7 @@ from unittest.mock import MagicMock
 ])
 def test_validate_basket(basket_string, expected_outcome):
     sku_service = MagicMock()
-    service = BasketService(sku_service)
+    service = ValidationService(sku_service)
 
     def fake_get_sku(sku):
         return {
