@@ -58,7 +58,9 @@ class PricingService(object):
     def _get_offer_value(self, offer, sku_quantities_dict, freebies_used_dict, quantity, original_price):
         total_saving = 0
         if 'price' in offer:
-            total_saving += (original_price * quantity) - offer['price']
+            while quantity >= offer['quantity']:
+                total_saving += (original_price * offer['quantity']) - offer['price']
+                quantity -= offer['quantity']
         if 'freebies' in offer:
             for freebie in offer['freebies']:
                 if freebie['sku'] not in sku_quantities_dict:
@@ -75,5 +77,6 @@ class PricingService(object):
                     number_discountable -= freebie['quantity']
 
         return total_saving
+
 
 
