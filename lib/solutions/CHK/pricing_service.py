@@ -27,11 +27,13 @@ class PricingService(object):
                     total += offer['price'] if 'price' in offer else offer['quantity'] * sku_info['price']
                     if 'freebies' in offer:
                         for freebie in offer['freebies']:
-                            freebie_sku_info = self.sku_service.get_sku(freebie['sku'])
-                            total -= (freebie['quantity'] * freebie_sku_info['price'])
+                            if freebie['sku'] in sku_quantities:
+                                freebie_sku_info = self.sku_service.get_sku(freebie['sku'])
+                                total -= (freebie['quantity'] * freebie_sku_info['price'])
                     relevant_offers = [offer for offer in sku_info['offers'] if offer['quantity'] <= quantity]
                 
             total += sku_info['price'] * quantity
 
         return total
+
 
