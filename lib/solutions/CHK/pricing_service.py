@@ -50,7 +50,7 @@ class PricingService(object):
                                         if offer_saving > freebie_saving:
                                             should_use_freebies = False
                                         elif offers_applied['prices_used'][freebie['sku']] > freebie['quantity']:
-                                            offers_applied['prices_used'] -= freebie['quantity']
+                                            offers_applied['prices_used'][freebie['sku']] -= freebie['quantity']
                                         else:
                                             total += offer_saving
                                 
@@ -94,4 +94,5 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
 
