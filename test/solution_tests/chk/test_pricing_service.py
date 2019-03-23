@@ -1,32 +1,27 @@
 from lib.solutions.CHK.pricing_service import PricingService
+from lib.solutions.CHK.sku_service import SkuService
 from unittest.mock import MagicMock
 from pytest import mark
 
+# getting a bit like an integration test here
 @mark.parametrize("basket_string,expected_output", [
     ("A", 50),
     ("AA", 100),
     ("AAA", 130),
     ("AAAA", 180),
-    ("AAAAAAAA", 360)
+    ("AAAAAAAA", 360),
+    ("ABCDABCD", 215)
 ])
 def test_get_price(basket_string, expected_output):
-    mock_sku_service = MagicMock()
-    service = PricingService(mock_sku_service)
+    sku_service = SkuService()
+    service = PricingService(sku_service)
 
-    mock_sku_service.get_sku.return_value = {
-            "sku": "A",
-            "price": 50,
-            "offers": [
-                {
-                    "quantity": 3,
-                    "price": 130
-                }
-            ]
-        }
-
+    sku_service.load_from_json_file('c:/development/fake/IWOCA/accelerate_runner/lib/solutions/chk/skus.json''')
+    
     price = service.get_price(basket_string)
 
     assert price == expected_output
+
 
 
 
