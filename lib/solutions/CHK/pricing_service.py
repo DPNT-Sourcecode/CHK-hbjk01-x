@@ -8,7 +8,7 @@ class PricingService(object):
         total = 0
         sku_quantities = {}
         
-        char_groups = groupby(basket_string, lambda key: key)
+        char_groups = groupby(sorted(basket_string), lambda key: key)
 
         for group_key, group in char_groups:
             sku_quantities[group_key] = len(list(group))
