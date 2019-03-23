@@ -1,7 +1,7 @@
 {
     "python.unitTest.pyTestArgs": [
         "lib",
-        "test"
+        "test/solution_tests"
     ],
     "python.unitTest.unittestEnabled": false,
     "python.unitTest.nosetestsEnabled": false,
