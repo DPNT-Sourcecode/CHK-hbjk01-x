@@ -67,8 +67,9 @@ class PricingService(object):
     def _find_best_offer(self, sku, offers, sku_quantities_dict, offers_applied, current_quantity, original_price):
         relevant_offers = [
              offer for offer in offers
-             if offer['quantity'] <= current_quantity
-             and (
+             if (offer['quantity'] <= current_quantity or
+                'anyOf' in offer and offer['quantity'] <= sum([sku_quantities_dict.get(x) for x in offer['anyOf']])
+             ) and (
                  'freebies' not in offer or
                  any(freebie for freebie in offer['freebies'] if freebie['sku'] != sku) or
                  any(freebie for freebie in offer['freebies'] if freebie['sku'] == sku and
