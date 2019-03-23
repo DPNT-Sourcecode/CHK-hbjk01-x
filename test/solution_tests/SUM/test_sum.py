@@ -1,4 +1,4 @@
-from solutions.SUM import sum_solution
+from lib.solutions.SUM import sum_solution
 from pytest import mark, raises
 
 @mark.parametrize("x,y,expected", [
