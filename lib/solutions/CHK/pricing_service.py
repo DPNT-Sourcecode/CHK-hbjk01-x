@@ -66,12 +66,12 @@ class PricingService(object):
 
     def _find_best_offer(self, sku, offers, sku_quantities_dict, offers_applied, current_quantity, original_price):
         relevant_offers = [
-            offer for offer in offers
+             offer for offer in offers
              if offer['quantity'] <= current_quantity
              and (
                  'freebies' not in offer or
-                 sku not in offer['freebies'] or
-                 offer['quantity'] + offer['freebies'][sku]['quantity'] <= current_quantity
+                 not any(freebie for freebie in offer['freebies'] if freebie['sku'] == sku and
+                    offer['quantity'] + freebie['quantity'] <= current_quantity)
              )]
         sorted_offers = sorted(relevant_offers, key=lambda offer: self._get_offer_value(offer, sku_quantities_dict, offers_applied, current_quantity, original_price), reverse=True)
         return sorted_offers[0] if len(sorted_offers) > 0 else None
@@ -101,4 +101,5 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
 
