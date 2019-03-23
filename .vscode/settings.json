@@ -1,5 +1,6 @@
 {
     "python.unitTest.pyTestArgs": [
+        "lib",
         "test"
     ],
     "python.unitTest.unittestEnabled": false,
