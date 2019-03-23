@@ -82,6 +82,11 @@ class PricingService(object):
         freebies_used_dict = offers_applied['freebies_used']
         
         total_saving = 0
+       if 'anyOf' in offer:
+           new_quantity = sum([sku_quantities_dict.get(x, 0) for x in offer['anyOf']])
+           if new_quantity > offer['quantity']:
+                quantity = new_quantity
+                sku_quantities_dict = {x: sku_quantities_dict.get(x, 0) for x in offer['anyOf']}
         if 'price' in offer:
             while quantity >= offer['quantity']:
                 total_saving += (original_price * offer['quantity']) - offer['price']
@@ -103,3 +108,4 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
