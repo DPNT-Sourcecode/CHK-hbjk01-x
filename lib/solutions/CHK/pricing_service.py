@@ -35,6 +35,7 @@ class PricingService(object):
                         for freebie in best_offer['freebies']:
                             if freebie['sku'] in sku_quantities:
                                 number_already_used = offers_applied['freebies_used'][freebie['sku']] if freebie['sku'] in offers_applied['freebies_used'] else 0
+                                number_already_used += offers_applied['prices_used'][freebie['sku']] if freebie['sku'] in offers_applied['prices_used'] else 0
                                 if number_already_used + freebie['quantity'] > sku_quantities[freebie['sku']]:
                                     continue
 
