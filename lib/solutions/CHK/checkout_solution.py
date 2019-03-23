@@ -25,3 +25,6 @@ def checkout(skus):
     price = PricingService(sku_service).get_price(skus)
 
     return price
+
+if __name__ == "__main__":
+    print(checkout('AAB'))
