@@ -93,7 +93,3 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
-
-
-
-
