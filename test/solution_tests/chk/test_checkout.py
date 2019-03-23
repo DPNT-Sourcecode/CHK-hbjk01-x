@@ -33,5 +33,3 @@ def test_checkout_valid_skus_returns_price(mock_sku_service, mock_validation_ser
     output = checkout("this")
 
     assert output == 75
-
-
