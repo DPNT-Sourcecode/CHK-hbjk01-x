@@ -50,9 +50,10 @@ class PricingService(object):
                                         if offer_saving > freebie_saving:
                                             should_use_freebies = False
                                         else: 
-                                            if freebie['sku'] in offers_applied['prices_used'] and (sku_quantities[freebie['sku']] - offers_applied['prices_used'][freebie['sku']]) < freebie['quantity']:
-                                                total += offer_saving
-                                            offers_applied['prices_used'][freebie['sku']] -= freebie['quantity']
+                                            if freebie['sku'] in offers_applied['prices_used']:
+                                                if (sku_quantities[freebie['sku']] - offers_applied['prices_used'][freebie['sku']]) < freebie['quantity']:
+                                                    total += offer_saving
+                                                offers_applied['prices_used'][freebie['sku']] -= freebie['quantity']
                                 
                                 if should_use_freebies:
                                     total -= (freebie['quantity'] * freebie_sku_info['price'])
