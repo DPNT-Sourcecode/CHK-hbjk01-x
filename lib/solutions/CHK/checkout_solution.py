@@ -16,6 +16,12 @@ def checkout(skus):
         logging.error("Unable to load SKUs", exc_info=True)
         return -1
 
+    valid_products = ValidationService(sku_service).validate_basket(skus)
+
+    if not valid_products:
+        return -1
+
     
+
 
 
