@@ -11,7 +11,8 @@ from pytest import mark
     ("AAAA", 180),
     ("AAAAA", 200),
     ("AAAAAAAA", 330),
-    ("ABCDABCD", 215)
+    ("ABCDABCD", 215),
+    ("EE", 80)
 ])
 def test_get_price(basket_string, expected_output):
     sku_service = SkuService()
@@ -22,3 +23,4 @@ def test_get_price(basket_string, expected_output):
     price = service.get_price(basket_string)
 
     assert price == expected_output
+

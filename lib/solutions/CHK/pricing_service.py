@@ -17,14 +17,14 @@ class PricingService(object):
             sku_info = self.sku_service.get_sku(sku)
 
             if quantity > 1 and 'offers' in sku_info and len(sku_info['offers']) > 0:
-                relevant_offers = [offer for offer in sku_info['offers'] if offer['quantity'] <= quantity]
+                relevant_offers = [offer for offer in sku_info['offers'] if offer['quantity'] <= quantity and 'price' in offer]
                 
                 while quantity > 1 and len(relevant_offers) > 0:
                     sorted_offers = sorted(relevant_offers, key=lambda key: key['quantity'], reverse=True)
                     offer = sorted_offers[0]
                     quantity -= offer['quantity']
                     total += offer['price']
-                    relevant_offers = [offer for offer in sku_info['offers'] if offer['quantity'] <= quantity]
+                    relevant_offers = [offer for offer in sku_info['offers'] if offer['quantity'] <= quantity and 'price' in offer]
                 
             total += sku_info['price'] * quantity
 
