@@ -36,6 +36,7 @@ class PricingService(object):
                             sku_quantities[next_sku] -= 1
 
                         total += best_offer['price']
+                        best_offer = self._find_best_offer(sku, sku_info['offers'], sku_quantities, offers_applied, quantity, sku_info['price'])
                         continue
                     
                     quantity -= best_offer['quantity']
@@ -140,5 +141,3 @@ class PricingService(object):
 
     def _get_sorted_anyof_prices(self, offer):
         return sorted(offer['anyOf'], key=lambda sku: self.sku_service.get_sku(sku)['price'], reverse=True)
-
-
