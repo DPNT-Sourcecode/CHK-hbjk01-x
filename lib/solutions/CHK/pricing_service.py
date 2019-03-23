@@ -68,7 +68,7 @@ class PricingService(object):
         relevant_offers = [
              offer for offer in offers
              if (offer['quantity'] <= current_quantity or
-                'anyOf' in offer and offer['quantity'] <= sum([sku_quantities_dict.get(x) for x in offer['anyOf']])
+                'anyOf' in offer and offer['quantity'] <= sum([sku_quantities_dict.get(x, 0) for x in offer['anyOf']])
              ) and (
                  'freebies' not in offer or
                  any(freebie for freebie in offer['freebies'] if freebie['sku'] != sku) or
@@ -103,3 +103,4 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
