@@ -35,5 +35,3 @@ class PricingService(object):
             total += sku_info['price'] * quantity
 
         return total
-
-
