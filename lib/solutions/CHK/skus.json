@@ -173,7 +173,7 @@
                 "quantity": 3,
                 "freebies": [
                     {
-                        "sky": "U",
+                        "sku": "U",
                         "quantity": 1
                     }
                 ]
@@ -211,3 +211,4 @@
         "price": 50
     }
 ]
+
