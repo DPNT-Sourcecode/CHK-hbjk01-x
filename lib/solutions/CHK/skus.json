@@ -58,5 +58,156 @@
                 }]
             }
         ]
+    },
+    {
+        "sku": "G",
+        "price": 20
+    },
+    {
+        "sku": "H",
+        "price": 10,
+        "offers": [
+            {
+                "quantity": 5,
+                "price": 45
+            },
+            {
+                "quantity": 10,
+                "price": 80
+            }
+        ]
+    },
+    {
+        "sku": "I",
+        "price": 35
+    },
+    {
+        "sku": "J",
+        "price": 60
+    },
+    {
+        "sku": "K",
+        "price": 80,
+        "offers": [
+            {
+                "quantity": 2,
+                "price": 150
+            }
+        ]
+    },
+    {
+        "sku": "L",
+        "price": 90
+    },
+    {
+        "sku": "M",
+        "price": 15
+    },
+    {
+        "sku": "N",
+        "price": 40,
+        "offers": [
+            {
+                "quantity": 3,
+                "freebies": [
+                    {
+                        "sku": "M",
+                        "quantity": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "O",
+        "price": 10
+    },
+    {
+        "sku": "P",
+        "price": 50,
+        "offers": [
+            {
+                "quantity": 5,
+                "price": 200
+            }
+        ]
+    },
+    {
+        "sku": "Q",
+        "price": 30,
+        "offers": [
+            {
+                "quantity": 3,
+                "price": 80
+            }
+        ]
+    },
+    {
+        "sku": "R",
+        "price": 50,
+        "offers": [
+            {
+                "quantity": 3,
+                "freebies": [
+                    {
+                        "sku": "Q",
+                        "quantity": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "S",
+        "price": 30
+    },
+    {
+        "sku": "T",
+        "price": 20
+    },
+    {
+        "sku": "U",
+        "price": 40,
+        "offers": [
+            {
+                "quantity": 3,
+                "freebies": [
+                    {
+                        "sky": "U",
+                        "quantity": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "sku": "V",
+        "price": 50,
+        "offers": [
+            {
+                "quantity": 2,
+                "price": 90
+            },
+            {
+                "quantity": 3,
+                "price": 130
+            }
+        ]
+    },
+    {
+        "sku": "W",
+        "price": 20
+    },
+    {
+        "sku": "X",
+        "price": 90
+    },
+    {
+        "sku": "Y",
+        "price": 10
+    },
+    {
+        "sku": "Z",
+        "price": 50
     }
 ]
