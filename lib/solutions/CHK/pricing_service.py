@@ -24,6 +24,20 @@ class PricingService(object):
                 best_offer = self._find_best_offer(sku, sku_info['offers'], sku_quantities, offers_applied, quantity, sku_info['price'])
 
                 while quantity > 1 and best_offer is not None:
+                    if 'anyOf' in best_offer and best_offer['quantity'] <= sum([sku_quantities.get(x, 0) for x in best_offer['anyOf']]):
+                        sorted_offer_skus = self._get_sorted_anyof_prices(best_offer)
+                        for _ in range(best_offer['quantity']):
+                            next_sku = next((s for s in sorted_offer_skus
+                                if s in sku_quantities and
+                                sku_quantities[s] > 0
+                            ))
+                            if next_sku == sku:
+                                quantity -= 1
+                            sku_quantities[next_sku] -= 1
+
+                        total += best_offer['price']
+                        continue
+                    
                     quantity -= best_offer['quantity']
                     total += best_offer['price'] if 'price' in best_offer else best_offer['quantity'] * sku_info['price']
                     if 'price' in best_offer:
@@ -126,3 +140,4 @@ class PricingService(object):
 
     def _get_sorted_anyof_prices(self, offer):
         return sorted(offer['anyOf'], key=lambda sku: self.sku_service.get_sku(sku)['price'], reverse=True)
+
