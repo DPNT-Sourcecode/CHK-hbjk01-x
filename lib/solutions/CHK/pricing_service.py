@@ -13,16 +13,24 @@ class PricingService(object):
         for group_key, group in char_groups:
             sku_quantities[group_key] = len(list(group))
 
-        freebies_used = {}
+        offers_applied = {
+            'freebies_used' = {}
+            'prices_used' = {}
+        }
         for sku, quantity in sku_quantities.items():
             sku_info = self.sku_service.get_sku(sku)
 
             if quantity > 1 and 'offers' in sku_info and len(sku_info['offers']) > 0:
-                best_offer = self._find_best_offer(sku_info['offers'], sku_quantities, freebies_used, quantity, sku_info['price'])
+                best_offer = self._find_best_offer(sku_info['offers'], sku_quantities, offers_applied, quantity, sku_info['price'])
 
                 while quantity > 1 and best_offer is not None:
                     quantity -= best_offer['quantity']
                     total += best_offer['price'] if 'price' in best_offer else best_offer['quantity'] * sku_info['price']
+                    if 'price' in best_offer:
+                        if sku in offers_applied['prices_used']:
+                            offers_applied['prices_used'][sku] += best_offer['quantity']
+                        else:
+                            offers_applied['prices_used'][sku] = best_offer['quantity']
                     if 'freebies' in best_offer:
                         for freebie in best_offer['freebies']:
                             if freebie['sku'] in sku_quantities:
@@ -82,5 +90,6 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
 
 
