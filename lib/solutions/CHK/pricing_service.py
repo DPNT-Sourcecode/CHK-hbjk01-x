@@ -72,11 +72,12 @@ class PricingService(object):
 
                 number_discountable = sku_quantities_dict[freebie['sku']] - number_already_used
                 freebie_sku_info = self.sku_service.get_sku(freebie['sku'])
-                while number_discountable >= freebie['quantity']:
+                while number_discountable >= freebie['quantity'] and quantity >= offer['quantity']:
                     total_saving += freebie['quantity'] * freebie_sku_info['price']
                     number_discountable -= freebie['quantity']
 
         return total_saving
+
 
 
 
