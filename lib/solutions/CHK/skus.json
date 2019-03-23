@@ -6,6 +6,10 @@
             {
                 "quantity": 3,
                 "price": 130
+            },
+            {
+                "quantity": 5,
+                "price": 200
             }
         ]
     },
@@ -28,5 +32,18 @@
         "sku": "D",
         "price": 15,
         "offers": []
+    },
+    {
+        "sku": "E",
+        "price": 40,
+        "offers": [
+            {
+                "quantity": 2,
+                "freebies": {
+                    "sku": "B",
+                    "quantity": 1
+                }
+            }
+        ]
     }
 ]
