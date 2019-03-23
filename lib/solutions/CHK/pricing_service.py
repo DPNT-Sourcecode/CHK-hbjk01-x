@@ -75,9 +75,6 @@ class PricingService(object):
                 while number_discountable >= freebie['quantity'] and quantity >= offer['quantity']:
                     total_saving += freebie['quantity'] * freebie_sku_info['price']
                     number_discountable -= freebie['quantity']
+                    quantity -= offer['quantity']
 
         return total_saving
-
-
-
-
