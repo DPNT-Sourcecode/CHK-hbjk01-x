@@ -1,7 +1,7 @@
 import logging
 
-from sku_service import SkuService
-from validation_service import ValidationService
+from .sku_service import SkuService
+from .validation_service import ValidationService
 
 logging.getLogger().setLevel(logging.INFO)
 
