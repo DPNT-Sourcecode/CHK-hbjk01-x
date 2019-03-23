@@ -18,7 +18,7 @@ class PricingService(object):
             sku_info = self.sku_service.get_sku(sku)
 
             if quantity > 1 and 'offers' in sku_info and len(sku_info['offers']) > 0:
-                best_offer = self.find_best_offer(sku_info['offers'], quantity)
+                best_offer = self._find_best_offer(sku_info['offers'], quantity)
 
                 while quantity > 1 and best_offer is not None:
                     quantity -= best_offer['quantity']
@@ -32,24 +32,24 @@ class PricingService(object):
 
                                 number_discountable = sku_quantities[freebie['sku']] - number_already_used
                                 freebie_sku_info = self.sku_service.get_sku(freebie['sku'])
-                                saving_from_freebie = freebie['quantity'] * freebie_sku_info['price']
                                 if 'offers' in freebie_sku_info and len(freebie_sku_info['offers']) > 0:
                                     freebie_best_offer = self.find_best_offer(freebie_sku_info['offers'], number_discountable)
                                     if freebie_best_offer is not None:
-                                        pass
+                                        freebie_saving = freebie['quantity'] * freebie_sku_info['price']
+                                        offer_saving = (freebie_sku_info['price'] * freebie['quantity']) - freebie_best_offer['price']
+                                        if freebie_saving >= offer_saving:
+                                            total -= freebie['quantity'] * freebie_sku_info['price']
+                                            freebies_used[freebie['sku']] = number_already_used + freebie['quantity']
                                 else:
-                                    total -= saving_from_freebie
+                                    total -= freebie['quantity'] * freebie_sku_info['price']
                                     freebies_used[freebie['sku']] = number_already_used + freebie['quantity']
-                    best_offer = self.find_best_offer(sku_info['offers'], quantity)
+                    best_offer = self._find_best_offer(sku_info['offers'], quantity)
                 
             total += sku_info['price'] * quantity
 
         return total
 
-    def find_best_offer(self, offers, current_quantity):
+    def _find_best_offer(self, offers, current_quantity):
         relevant_offers = [offer for offer in offers if offer['quantity'] <= current_quantity]
         sorted_offers = sorted(relevant_offers, key=lambda key: key['quantity'], reverse=True)
         return sorted_offers[0] if len(sorted_offers) > 0 else None
-
-    def apply_offer(self, offer, sku_quantities, freebies_used, quantity, total):
-        pass
