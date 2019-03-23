@@ -125,6 +125,4 @@ class PricingService(object):
         return total_saving
 
     def _get_sorted_anyof_prices(self, offer):
-        return sorted(offer['anyOf'], lambda sky: self.sku_service.get_sku(sku)['price'], reverse=True)
-
-
+        return sorted(offer['anyOf'], key=lambda sku: self.sku_service.get_sku(sku)['price'], reverse=True)
