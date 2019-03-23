@@ -6,7 +6,7 @@ from pytest import mark
     ("A", 50),
     ("AA", 100),
     ("AAA", 130),
-    ("AAAA", 180)
+    ("AAAA", 180),
     ("AAAAAAAA", 370)
 ])
 def test_get_price(basket_string, expected_output):
@@ -27,4 +27,5 @@ def test_get_price(basket_string, expected_output):
     price = service.get_price(basket_string)
 
     assert price == expected_output
+
 
