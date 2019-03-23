@@ -14,6 +14,7 @@ class PricingService(object):
             sku_quantities[group_key] = len(list(group))
 
         freebies_used = {}
+        offers_used = {}
         for sku, quantity in sku_quantities.items():
             sku_info = self.sku_service.get_sku(sku)
 
@@ -43,10 +44,10 @@ class PricingService(object):
                                             should_use_freebies = False
                                         else:
                                             # the offer on this freebie isn't as good, so also counteract that in the price
-                                            total_saving -= offer_saving
+                                            total += offer_saving
                                 
                                 if should_use_freebies:
-                                    total -= total_saving
+                                    total -= freebie['quantity'] * freebie_sku_info['price']
                                     freebies_used[freebie['sku']] = number_already_used + freebie['quantity']
                     best_offer = self._find_best_offer(sku_info['offers'], sku_quantities, freebies_used, quantity, sku_info['price'])
                 
@@ -82,3 +83,4 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
