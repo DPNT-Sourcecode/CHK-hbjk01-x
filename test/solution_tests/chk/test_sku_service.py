@@ -1,4 +1,4 @@
-from solutions.CHK.checkout_solution.sku_service import SkuService
+from solutions.CHK.sku_service import SkuService
 from pytest import mark
 
 @mark.parametrize("sku,expected_price", [
