@@ -5,8 +5,8 @@ from solutions.CHK.validation_service import ValidationService
 from unittest.mock import patch
 from pytest import mark
 
-@patch('solutions.CHK.validation_service.ValidationService', spec=ValidationService)
-@patch('solutions.CHK.sku_service.SkuService', spec=SkuService)
+@patch('solutions.CHK.checkout_solution.ValidationService', spec=ValidationService)
+@patch('solutions.CHK.checkout_solution.SkuService', spec=SkuService)
 def test_checkout_unable_to_load_sku_returns_fail(mock_sku_service, mock_validation_service):
     mock_sku_service.load_from_json_file.side_effect = OverflowError()
 
@@ -14,8 +14,8 @@ def test_checkout_unable_to_load_sku_returns_fail(mock_sku_service, mock_validat
 
     assert output == -1
 
-@patch('solutions.CHK.validation_service.ValidationService', spec=ValidationService)
-@patch('solutions.CHK.sku_service.SkuService', spec=SkuService)
+@patch('solutions.CHK.checkout_solution.ValidationService', spec=ValidationService)
+@patch('solutions.CHK.checkout_solution.SkuService', spec=SkuService)
 def test_checkout_invalid_string_returns_fail(mock_sku_service, mock_validation_service):
     mock_validation_service.validate_basket.return_value = False
 
@@ -23,9 +23,9 @@ def test_checkout_invalid_string_returns_fail(mock_sku_service, mock_validation_
 
     assert output == -1
 
-@patch('solutions.CHK.pricing_service.PricingService', spec=PricingService)
-@patch('solutions.CHK.validation_service.ValidationService', spec=ValidationService)
-@patch('solutions.CHK.sku_service.SkuService', spec=SkuService)
+@patch('solutions.CHK.checkout_solution.PricingService', spec=PricingService)
+@patch('solutions.CHK.checkout_solution.ValidationService', spec=ValidationService)
+@patch('solutions.CHK.checkout_solution.SkuService', spec=SkuService)
 def test_checkout_valid_skus_returns_price(mock_sku_service, mock_validation_service, mock_pricing_service):
     mock_validation_service.validate_basket.return_value = True
     mock_pricing_service.get_price.return_value = 75
@@ -33,3 +33,4 @@ def test_checkout_valid_skus_returns_price(mock_sku_service, mock_validation_ser
     output = checkout("this")
 
     assert output == 75
+
