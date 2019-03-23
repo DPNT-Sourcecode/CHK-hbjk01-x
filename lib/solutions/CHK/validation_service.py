@@ -1,4 +1,4 @@
-class BasketService(object):
+class ValidationService(object):
     def __init__(self, sku_service):
         self.sku_service = sku_service
 
@@ -7,4 +7,9 @@ class BasketService(object):
         if basket_string is None or not isinstance(basket_string, str):
             return False # this isn't even a proper string
 
-        return True # just for now
+        for char in basket_string:
+            sku = self.sku_service.get_sku(char)
+            if sku is None:
+                return False
+
+        return True
