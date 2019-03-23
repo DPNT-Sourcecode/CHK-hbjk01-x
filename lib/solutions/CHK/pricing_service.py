@@ -56,7 +56,7 @@ class PricingService(object):
                                                 offers_applied['prices_used'][freebie['sku']] -= freebie['quantity']
                                 
                                 if should_use_freebies:
-                                    total -= freebie['quantity'] * freebie_sku_info['price']
+                                    total -= (freebie['quantity'] * freebie_sku_info['price'])
                                     offers_applied['freebies_used'][freebie['sku']] = number_already_used + freebie['quantity']
                     best_offer = self._find_best_offer(sku_info['offers'], sku_quantities, offers_applied, quantity, sku_info['price'])
                 
@@ -95,3 +95,4 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
