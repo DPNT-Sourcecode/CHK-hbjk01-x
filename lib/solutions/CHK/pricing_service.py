@@ -90,6 +90,22 @@ class PricingService(object):
             while quantity >= offer['quantity']:
                 total_saving += (original_price * offer['quantity']) - offer['price']
                 quantity -= offer['quantity']
+        if 'price' in offer and 'anyOf' in offer:
+            sorted_offer_skus = self._get_sorted_anyof_prices(offer)
+            used_skus_for_any_of = {}
+            while quantity >= offer['quantity']:
+                next_sku = next((s for s in sorted_offer_skus
+                    if s in sku_quantities_dict and
+                    sku_quantities_dict[s] > 0 and
+                    (s not in used_skus_for_any_of or sku_quantities_dict[s] > used_skus_for_any_of[s])
+                ))
+                if next_sku in used_skus_for_any_of:
+                    used_skus_for_any_of[next_sku] += 1
+                else:
+                    used_skus_for_any_of[next_sku] = 1
+                sku_price = self.sku_service.get_sku(next_sku)['price']
+                total_saving += sku_price
+                quantity -= 1
         if 'freebies' in offer:
             for freebie in offer['freebies']:
                 if freebie['sku'] not in sku_quantities_dict:
@@ -107,5 +123,8 @@ class PricingService(object):
                     quantity -= offer['quantity']
 
         return total_saving
+
+    def _get_sorted_anyof_prices(self, offer):
+        return sorted(offer['anyOf'], lambda sky: self.sku_service.get_sku(sku)['price'], reverse=True)
 
 
