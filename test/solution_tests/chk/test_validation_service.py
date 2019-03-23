@@ -1,4 +1,4 @@
-from solutions.CHK.validation_service import ValidationService
+from lib.solutions.CHK.validation_service import ValidationService
 from pytest import mark
 from unittest.mock import MagicMock
 

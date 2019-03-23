@@ -1,7 +1,7 @@
-from solutions.CHK.checkout_solution import checkout
-from solutions.CHK.sku_service import SkuService
-from solutions.CHK.pricing_service import PricingService
-from solutions.CHK.validation_service import ValidationService
+from lib.solutions.CHK.checkout_solution import checkout
+from lib.solutions.CHK.sku_service import SkuService
+from lib.solutions.CHK.pricing_service import PricingService
+from lib.solutions.CHK.validation_service import ValidationService
 from unittest.mock import patch
 from pytest import mark
 
@@ -33,3 +33,4 @@ def test_checkout_valid_skus_returns_price(mock_sku_service, mock_validation_ser
     output = checkout("this")
 
     assert output == 75
+
