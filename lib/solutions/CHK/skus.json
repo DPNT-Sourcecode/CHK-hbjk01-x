@@ -87,11 +87,11 @@
     },
     {
         "sku": "K",
-        "price": 80,
+        "price": 70,
         "offers": [
             {
                 "quantity": 2,
-                "price": 150
+                "price": 120
             }
         ]
     },
